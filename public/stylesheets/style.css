@@ -1,0 +1,31 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.div1 {
+  color: crimson;
+}
+
+.div2 {
+  color: green;
+}
+
+.div3 {
+  color: purple;
+}
+
+.tool-bar{
+  border: solid 2px black;
+}
+
+.tool-bar *{
+  border-right: solid 1px gray;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: lightgoldenrodyellow;
+}
