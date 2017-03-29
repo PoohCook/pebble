@@ -23,9 +23,16 @@ a {
   border: solid 2px black;
 }
 
-.tool-bar *{
+.tool-bar > *{
   border-right: solid 1px gray;
   display: inline-block;
   padding: 5px 10px;
   background-color: lightgoldenrodyellow;
+}
+
+
+
+
+#main {
+  color: blue;
 }

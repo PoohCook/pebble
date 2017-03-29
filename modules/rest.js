@@ -1,53 +1,33 @@
 /**
+ * Rest Handlers
  * Created by hunnytree on 3/27/17.
  */
 
 
-var fs = require("fs");
-var userFileName = __dirname + "/../" + "users.json";
-var restUtils = require('./restUtils');
+var User = require('./user');
 
-
-function init(app) {
+exports.init = function(app) {
 
 
     app.get('/listUsers', function (req, res) {
-        fs.readFile(userFileName, 'utf8', function (err, data) {
+        User.getAll( function (err, data) {
             console.log(data);
-            res.end(data);
+            res.end(JSON.stringify(data));
         });
     });
 
 
     app.post('/AddUser', function (req, res) {
-
-        var newUser = req.body;
-
-        var err = restUtils.validateUser(newUser);
-        if (err) {
-            res.status(400).end(err.message)
-        }
-        else fs.readFile(userFileName, 'utf8', function (err, data) {
-                data = JSON.parse(data);
-
-                var newUserId = restUtils.findNextUserId(data);
-                newUser.id = newUserId;
-                data["user" + newUserId] = newUser;
-                console.log(data);
-
-                fs.writeFile(userFileName, JSON.stringify(data), 'utf8', function (err) {
-                    if (err) {
-                        res.status(400).end(err.message)
-                    }
-                    else res.end(JSON.stringify(data));
-                });
-            })
+        User.add( req.body, function (err, newUser) {
+            if (err) {
+                res.status(400).end(err.message)
+            }
+            else res.end(JSON.stringify(newUser));
+        });
     });
 
+    return exports;
+
+};
 
 
-}
-
-
-
-exports.init = init;
